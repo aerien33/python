@@ -1,12 +1,17 @@
-# ZADANIE 2.10
-# Mamy dany string wielowierszowy line.
-# Podać sposób obliczenia liczby wyrazów w stringu.
-# Przez wyraz rozumiemy ciąg "czarnych" znaków,
-# oddzielony od innych wyrazów białymi znakami (spacja, tabulacja, newline).
+# --- PROBLEM SET 2 ---
+# clone repo
+# run: python3 pset2.py
 
-line = '"Króliczek"\n\tRóżowy nosek,\n\tdługie uszka cicho drżą,\n\ti kic w miękki mech.\n'
-print(line)
+def count_words(text):
+    return len(text.split())
 
-n_words = len(line.split())
-print("Liczba słów: " + str(n_words))
-assert n_words == 12
+def test_count_words(text, expected):
+    print("Dane wejściowe: \n" + text)
+    print("Liczba słów: " + str(count_words(text)))
+    assert count_words(text) == expected
+
+if __name__ == '__main__':
+    line = '"Króliczek"\n\tRóżowy nosek,\n\tdługie uszka cicho drżą,\n\ti kic w miękki mech.\n'
+
+    print("--- Test 2.10: count words---")
+    test_count_words(line, 12)
