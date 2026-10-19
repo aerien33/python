@@ -13,6 +13,9 @@ def test_count_words(text, expected):
     print("Liczba słów: " + str(count_words(text)))
     assert count_words(text) == expected
 
+def test_split_word(text, expected):
+    assert split_word(text) == expected
+
 if __name__ == '__main__':
     line1 = '"Króliczek"\n\tRóżowy nosek,\n\tdługie uszka cicho drżą,\n\ti kic w miękki mech.\n'
     line2 = """"Piesek"
@@ -26,5 +29,5 @@ if __name__ == '__main__':
     test_count_words(line2, 10)
 
     print("--- Test 2.11: split word---")
-    print(split_word("Bork"))
-    print(split_word("Woof woof"))
+    test_split_word("Bork", "B_o_r_k")
+    test_split_word("Woof woof", "W_o_o_f_ _w_o_o_f")
