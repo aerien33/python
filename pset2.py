@@ -44,6 +44,9 @@ def len_sort(text):
 def count_zeros(n):
     return str(n).count('0')
 
+def zero_fill(nums):
+    return list(map(lambda n: str(n).zfill(3), nums))
+
 if __name__ == '__main__':
     line1 = '"Króliczek"\n\tRóżowy nosek,\n\tdługie uszka cicho drżą,\n\ti kic w miękki mech.\n'
     line2 = """"Piesek"
@@ -58,6 +61,8 @@ if __name__ == '__main__':
     num2 = 3405240432523042
     nums1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     nums2 = [321, 32, 543, 643, 423, 1000]
+    nums3 = [321, 32, 5, 643, 42, 100]
+    nums4 = [3, 753, 97, 65, 2, 404]
 
     expected_alph_sort1 = ['"Króliczek"', 'cicho', 'drżą,', 'długie', 'i', 'kic', 'mech.', 'miękki', 'nosek,', 'Różowy', 'uszka', 'w']
     expected_alph_sort2 = ['"Piesek"', 'brzuszek', 'ciepły', 'do', 'Klapnięte', 'miziania,', 'na', 'poduszce.', 'uszko,', 'śpi']
@@ -104,3 +109,7 @@ if __name__ == '__main__':
     print("--- Testing 2.18: count zeros in large integer---")
     test(count_zeros, num1, expected=4)
     test(count_zeros, num2, expected=3)
+
+    print("--- Testing 2.19: fill 1 and 2-digit numbers with zeros")
+    test(zero_fill, nums3, expected=['321', '032', '005', '643', '042', '100'])
+    test(zero_fill, nums4, expected=['003', '753', '097', '065', '002', '404'])
