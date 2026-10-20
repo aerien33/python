@@ -23,6 +23,12 @@ def combine_chars(text, fun):
 def total_word_len(text):
     return len(text.replace(" ", '').replace("\t", '').replace("\n", '').strip())
 
+def longest_word(text):
+    return max(text.split(), key=len)
+
+def longest_word_len(text):
+    return max(map(lambda word: len(word), text.split()))
+
 if __name__ == '__main__':
     line1 = '"Króliczek"\n\tRóżowy nosek,\n\tdługie uszka cicho drżą,\n\ti kic w miękki mech.\n'
     line2 = """"Piesek"
@@ -48,3 +54,9 @@ if __name__ == '__main__':
     print("--- Testing 2.13: total word length---")
     test(total_word_len, line1, expected=60)
     test(total_word_len, line2, expected=62)
+
+    print("--- Testing 2.14: longest word and its length---")
+    test(longest_word, line1, expected='"Króliczek"')
+    test(longest_word, line2, expected="Klapnięte")
+    test(longest_word_len, line1, expected=len(longest_word(line1)))
+    test(longest_word_len, line2, expected=len(longest_word(line2)))
