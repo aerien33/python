@@ -29,6 +29,9 @@ def longest_word(text):
 def longest_word_len(text):
     return max(map(lambda word: len(word), text.split()))
 
+def convert_nums_to_str(nums):
+    return "".join(map(str, nums))
+
 if __name__ == '__main__':
     line1 = '"Króliczek"\n\tRóżowy nosek,\n\tdługie uszka cicho drżą,\n\ti kic w miękki mech.\n'
     line2 = """"Piesek"
@@ -36,6 +39,9 @@ if __name__ == '__main__':
         ciepły brzuszek do miziania,
         śpi na poduszce.
     """
+
+    nums1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    nums2 = [321, 32, 543, 643, 423, 1000]
 
     print("--- Testing 2.10: count words---")
     test(count_words, line1, expected=12)
@@ -60,3 +66,7 @@ if __name__ == '__main__':
     test(longest_word, line2, expected="Klapnięte")
     test(longest_word_len, line1, expected=len(longest_word(line1)))
     test(longest_word_len, line2, expected=len(longest_word(line2)))
+
+    print("--- Testing 2.15: convert nums to string---")
+    test(convert_nums_to_str, nums1, expected="12345678910")
+    test(convert_nums_to_str, nums2, expected="321325436434231000")
