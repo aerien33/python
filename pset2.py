@@ -41,6 +41,9 @@ def alphabetical_sort(text):
 def len_sort(text):
     return sorted(text.split(), key=len)
 
+def count_zeros(n):
+    return str(n).count('0')
+
 if __name__ == '__main__':
     line1 = '"Króliczek"\n\tRóżowy nosek,\n\tdługie uszka cicho drżą,\n\ti kic w miękki mech.\n'
     line2 = """"Piesek"
@@ -51,6 +54,8 @@ if __name__ == '__main__':
     gvr = "I will never forget the first time I met GvR"
     expected_gvr = "I will never forget the first time I met Guido van Rossum"
 
+    num1 = 1032012301231290
+    num2 = 3405240432523042
     nums1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     nums2 = [321, 32, 543, 643, 423, 1000]
 
@@ -95,3 +100,7 @@ if __name__ == '__main__':
     test(alphabetical_sort, line2, expected=expected_alph_sort2)
     test(len_sort, line1, expected=expected_len_sort1)
     test(len_sort, line2, expected=expected_len_sort2)
+
+    print("--- Testing 2.18: count zeros in large integer---")
+    test(count_zeros, num1, expected=4)
+    test(count_zeros, num2, expected=3)
