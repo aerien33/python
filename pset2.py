@@ -32,6 +32,9 @@ def longest_word_len(text):
 def convert_nums_to_str(nums):
     return "".join(map(str, nums))
 
+def replace_gvr(text):
+    return text.replace("GvR", "Guido van Rossum")
+
 if __name__ == '__main__':
     line1 = '"Króliczek"\n\tRóżowy nosek,\n\tdługie uszka cicho drżą,\n\ti kic w miękki mech.\n'
     line2 = """"Piesek"
@@ -39,6 +42,8 @@ if __name__ == '__main__':
         ciepły brzuszek do miziania,
         śpi na poduszce.
     """
+    gvr = "I will never forget the first time I met GvR"
+    expected_gvr = "I will never forget the first time I met Guido van Rossum"
 
     nums1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     nums2 = [321, 32, 543, 643, 423, 1000]
@@ -70,3 +75,6 @@ if __name__ == '__main__':
     print("--- Testing 2.15: convert nums to string---")
     test(convert_nums_to_str, nums1, expected="12345678910")
     test(convert_nums_to_str, nums2, expected="321325436434231000")
+
+    print("--- Testing 2.16: replace GvR with Guido van Rossum---")
+    test(replace_gvr, gvr, expected=expected_gvr)
