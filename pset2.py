@@ -20,6 +20,9 @@ def last_char(word):
 def combine_chars(text, fun):
     return ''.join([fun(word) for word in text.split()])
 
+def total_word_len(text):
+    return len(text.replace(" ", '').replace("\t", '').replace("\n", '').strip())
+
 if __name__ == '__main__':
     line1 = '"Króliczek"\n\tRóżowy nosek,\n\tdługie uszka cicho drżą,\n\ti kic w miękki mech.\n'
     line2 = """"Piesek"
@@ -42,3 +45,6 @@ if __name__ == '__main__':
     test(combine_chars, line1, last_char, expected='"y,eao,icwi.')
     test(combine_chars, line2, last_char, expected='"e,yko,ia.')
 
+    print("--- Testing 2.13: total word length---")
+    test(total_word_len, line1, expected=60)
+    test(total_word_len, line2, expected=62)
