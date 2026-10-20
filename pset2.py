@@ -2,14 +2,23 @@
 # clone repo
 # run: python3 pset2.py
 
+def test(fun, *args, expected):
+    assert fun(*args) == expected
+
 def count_words(text):
     return len(text.split())
 
 def split_word(word):
     return '_'.join(list(word))
 
-def test(fun, text, expected):
-    assert fun(text) == expected
+def first_char(word):
+    return word[0]
+
+def last_char(word):
+    return word[-1]
+
+def combine_chars(text, fun):
+    return ''.join([fun(word) for word in text.split()])
 
 if __name__ == '__main__':
     line1 = '"Króliczek"\n\tRóżowy nosek,\n\tdługie uszka cicho drżą,\n\ti kic w miękki mech.\n'
@@ -20,9 +29,16 @@ if __name__ == '__main__':
     """
 
     print("--- Testing 2.10: count words---")
-    test(count_words, line1, 12)
-    test(count_words, line2, 10)
+    test(count_words, line1, expected=12)
+    test(count_words, line2, expected=10)
 
     print("--- Testing 2.11: split word---")
-    test(split_word, "Bork", "B_o_r_k")
-    test(split_word, "Woof woof", "W_o_o_f_ _w_o_o_f")
+    test(split_word, "Bork", expected="B_o_r_k")
+    test(split_word, "Woof woof", expected="W_o_o_f_ _w_o_o_f")
+
+    print("--- Testing 2.12: combine first/last chars---")
+    test(combine_chars, line1, first_char, expected='"Rnducdikwmm')
+    test(combine_chars, line2, first_char, expected='"Kucbdmśnp')
+    test(combine_chars, line1, last_char, expected='"y,eao,icwi.')
+    test(combine_chars, line2, last_char, expected='"e,yko,ia.')
+
