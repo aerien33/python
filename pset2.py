@@ -35,6 +35,12 @@ def convert_nums_to_str(nums):
 def replace_gvr(text):
     return text.replace("GvR", "Guido van Rossum")
 
+def alphabetical_sort(text):
+    return sorted(text.split(), key=str.lower)
+
+def len_sort(text):
+    return sorted(text.split(), key=len)
+
 if __name__ == '__main__':
     line1 = '"Króliczek"\n\tRóżowy nosek,\n\tdługie uszka cicho drżą,\n\ti kic w miękki mech.\n'
     line2 = """"Piesek"
@@ -47,6 +53,11 @@ if __name__ == '__main__':
 
     nums1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     nums2 = [321, 32, 543, 643, 423, 1000]
+
+    expected_alph_sort1 = ['"Króliczek"', 'cicho', 'drżą,', 'długie', 'i', 'kic', 'mech.', 'miękki', 'nosek,', 'Różowy', 'uszka', 'w']
+    expected_alph_sort2 = ['"Piesek"', 'brzuszek', 'ciepły', 'do', 'Klapnięte', 'miziania,', 'na', 'poduszce.', 'uszko,', 'śpi']
+    expected_len_sort1 = ['i', 'w', 'kic', 'uszka', 'cicho', 'drżą,', 'mech.', 'Różowy', 'nosek,', 'długie', 'miękki', '"Króliczek"']
+    expected_len_sort2 = ['do', 'na', 'śpi', 'uszko,', 'ciepły', '"Piesek"', 'brzuszek', 'Klapnięte', 'miziania,', 'poduszce.']
 
     print("--- Testing 2.10: count words---")
     test(count_words, line1, expected=12)
@@ -78,3 +89,9 @@ if __name__ == '__main__':
 
     print("--- Testing 2.16: replace GvR with Guido van Rossum---")
     test(replace_gvr, gvr, expected=expected_gvr)
+
+    print("--- Testing 2.17: alphabetical sort and len sort---")
+    test(alphabetical_sort, line1, expected=expected_alph_sort1)
+    test(alphabetical_sort, line2, expected=expected_alph_sort2)
+    test(len_sort, line1, expected=expected_len_sort1)
+    test(len_sort, line2, expected=expected_len_sort2)
