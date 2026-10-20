@@ -54,8 +54,18 @@ if __name__ == '__main__':
         ciepły brzuszek do miziania,
         śpi na poduszce.
     """
-    gvr = "I will never forget the first time I met GvR"
-    expected_gvr = "I will never forget the first time I met Guido van Rossum"
+
+    expected_alph_sort1 = ['"Króliczek"', 'cicho', 'drżą,', 'długie', 'i', 'kic', 'mech.', 'miękki', 'nosek,', 'Różowy', 'uszka', 'w']
+    expected_alph_sort2 = ['"Piesek"', 'brzuszek', 'ciepły', 'do', 'Klapnięte', 'miziania,', 'na', 'poduszce.', 'uszko,', 'śpi']
+    expected_len_sort1 = ['i', 'w', 'kic', 'uszka', 'cicho', 'drżą,', 'mech.', 'Różowy', 'nosek,', 'długie', 'miękki', '"Króliczek"']
+    expected_len_sort2 = ['do', 'na', 'śpi', 'uszko,', 'ciepły', '"Piesek"', 'brzuszek', 'Klapnięte', 'miziania,', 'poduszce.']
+
+    gvr1 = "I will never forget the first time I met GvR"
+    expected_gvr1 = "I will never forget the first time I met Guido van Rossum"
+    gvr2 = "It was when GvR was on a walk in the park on a rainy day"
+    expected_gvr2 = "It was when Guido van Rossum was on a walk in the park on a rainy day"
+    gvr3 = "GvR is the best person in the world!"
+    expected_gvr3 = "Guido van Rossum is the best person in the world!"
 
     num1 = 1032012301231290
     num2 = 3405240432523042
@@ -63,11 +73,6 @@ if __name__ == '__main__':
     nums2 = [321, 32, 543, 643, 423, 1000]
     nums3 = [321, 32, 5, 643, 42, 100]
     nums4 = [3, 753, 97, 65, 2, 404]
-
-    expected_alph_sort1 = ['"Króliczek"', 'cicho', 'drżą,', 'długie', 'i', 'kic', 'mech.', 'miękki', 'nosek,', 'Różowy', 'uszka', 'w']
-    expected_alph_sort2 = ['"Piesek"', 'brzuszek', 'ciepły', 'do', 'Klapnięte', 'miziania,', 'na', 'poduszce.', 'uszko,', 'śpi']
-    expected_len_sort1 = ['i', 'w', 'kic', 'uszka', 'cicho', 'drżą,', 'mech.', 'Różowy', 'nosek,', 'długie', 'miękki', '"Króliczek"']
-    expected_len_sort2 = ['do', 'na', 'śpi', 'uszko,', 'ciepły', '"Piesek"', 'brzuszek', 'Klapnięte', 'miziania,', 'poduszce.']
 
     print("--- Testing 2.10: count words---")
     test(count_words, line1, expected=12)
@@ -98,7 +103,9 @@ if __name__ == '__main__':
     test(convert_nums_to_str, nums2, expected="321325436434231000")
 
     print("--- Testing 2.16: replace GvR with Guido van Rossum---")
-    test(replace_gvr, gvr, expected=expected_gvr)
+    test(replace_gvr, gvr1, expected=expected_gvr1)
+    test(replace_gvr, gvr2, expected=expected_gvr2)
+    test(replace_gvr, gvr3, expected=expected_gvr3)
 
     print("--- Testing 2.17: alphabetical sort and len sort---")
     test(alphabetical_sort, line1, expected=expected_alph_sort1)
