@@ -2,6 +2,25 @@
 # clone repo
 # run: python3 pset3.py
 
+def test(fun, *args, expected):
+    assert fun(*args) == expected
+
+def for_loop(data):
+    result = []
+    for i in range(data["start"], data["end"]):
+        if data["condition"](i):
+            result.append(i)
+    return result
+
+def while_loop(data):
+    result = []
+    i = data["start"]
+    while i < data["end"]:
+        if data["condition"](i):
+            result.append(i)
+        i = i + 1
+    return result
+
 if __name__ == '__main__':
     print("--- 3.1: is this syntax correct? ---")
     # --- a) ---
@@ -48,5 +67,16 @@ if __name__ == '__main__':
     # L = list(map(pow, range(8)))
     print("f) 'pow' function missing required argument 'exp'")
 
+
+    print("--- 3.3: testing 'for' vs 'while' loop ---")
+    loop_data = {
+        "start": 0,
+        "end": 31,
+        "condition": lambda x: not x % 3 == 0,
+        "expected": [1, 2, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 19, 20, 22, 23, 25, 26, 28, 29]
+    }
+
+    test(for_loop, loop_data, expected=loop_data["expected"])
+    test(while_loop, loop_data, expected=loop_data["expected"])
 
     print("--- done ---")
