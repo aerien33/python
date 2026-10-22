@@ -21,6 +21,18 @@ def while_loop(data):
         i = i + 1
     return result
 
+def process_float():
+    while True:
+        i = input("Insert number (type 'stop' to exit):\n")
+
+        if i == 'stop':
+            break
+        else:
+            try:
+                print(f"Result: ({float(i):,g})^3 = {float(i)**3:,g}".replace(","," "))
+            except ValueError:
+                print("Please insert a valid number")
+
 if __name__ == '__main__':
     print("--- 3.1: is this syntax correct? ---")
     # --- a) ---
@@ -78,5 +90,8 @@ if __name__ == '__main__':
 
     test(for_loop, loop_data, expected=loop_data["expected"])
     test(while_loop, loop_data, expected=loop_data["expected"])
+
+    print("--- 3.4: test user input (float) ---")
+    test(process_float, expected=None)
 
     print("--- done ---")
