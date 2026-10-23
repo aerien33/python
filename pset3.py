@@ -2,7 +2,7 @@
 # clone repo
 # run: python3 pset3.py
 
-from itertools import count, islice, cycle, repeat, chain, takewhile
+from itertools import count, islice, repeat, chain
 
 def test(fun, *args, expected):
     assert fun(*args) == expected
@@ -42,6 +42,12 @@ def draw_grid(rows, cols):
     horizontal = "+" + "".join(repeat("---+", rows))
     vertical = "\n" + "|" + "".join(repeat("   |", rows)) + "\n"
     return horizontal + "".join(repeat(vertical + horizontal, cols))
+
+def intersection(data1, data2):
+    return sorted(set(data1).intersection(set(data2)))
+
+def union(data1, data2):
+    return sorted(set(chain(data1, data2)))
 
 if __name__ == '__main__':
     print("--- 3.1: is this syntax correct? ---")
@@ -122,5 +128,25 @@ if __name__ == '__main__':
 
     print(draw_grid(grid_data["rows"], grid_data["cols"]))
     test(draw_grid, grid_data["rows"], grid_data["cols"], expected=grid_data["expected"])
+
+    print("--- 3.8: test intersection and union set ---")
+    lists_data = [
+        {
+            "list1": [1, 2, 4, 3],
+            "list2": [2, 3, 4, 6, 5],
+            "exp_intersection": [2, 3, 4],
+            "exp_union": [1, 2, 3, 4, 5, 6]
+        },
+        {
+            "list1": ["b", "a", "c", "d"],
+            "list2": ["b", "c", "e", "d", "f"],
+            "exp_intersection": ["b", "c", "d"],
+            "exp_union": ["a", "b", "c", "d", "e", "f"]
+        }
+    ]
+
+    for data in lists_data:
+        test(intersection, data["list1"], data["list2"], expected=data["exp_intersection"])
+        test(union, data["list1"], data["list2"], expected=data["exp_union"])
 
     print("--- done ---")
