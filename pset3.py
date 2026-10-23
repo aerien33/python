@@ -2,6 +2,7 @@
 # clone repo
 # run: python3 pset3.py
 
+from functools import reduce
 from itertools import count, islice, repeat, chain
 
 def test(fun, *args, expected):
@@ -48,6 +49,9 @@ def intersection(data1, data2):
 
 def union(data1, data2):
     return sorted(set(chain(data1, data2)))
+
+def calculate_sum(data):
+    return list(map(lambda item: reduce(lambda total, x: total + x, item, 0), data))
 
 if __name__ == '__main__':
     print("--- 3.1: is this syntax correct? ---")
@@ -148,5 +152,13 @@ if __name__ == '__main__':
     for data in lists_data:
         test(intersection, data["list1"], data["list2"], expected=data["exp_intersection"])
         test(union, data["list1"], data["list2"], expected=data["exp_union"])
+
+    print("--- 3.9: test sum of numbers from lists or tuples ---")
+    series_data = {
+        "data": [[],[4],(1,2),[3,4],(5,6,7)],
+        "expected": [0, 4, 3, 7, 18]
+    }
+
+    test(calculate_sum, series_data["data"], expected=series_data["expected"])
 
     print("--- done ---")
