@@ -2,6 +2,8 @@
 # clone repo
 # run: python3 pset3.py
 
+from itertools import count, islice, cycle, repeat, chain, takewhile
+
 def test(fun, *args, expected):
     assert fun(*args) == expected
 
@@ -21,17 +23,20 @@ def while_loop(data):
         i = i + 1
     return result
 
-def process_float():
+def cube_float_from_input():
     while True:
         i = input("Insert number (type 'stop' to exit):\n")
-
-        if i == 'stop':
-            break
+        if i == 'stop': break
         else:
             try:
                 print(f"Result: ({float(i):,g})^3 = {float(i)**3:,g}".replace(","," "))
             except ValueError:
                 print("Please insert a valid number")
+
+def draw_ruler(size):
+    ruler = "|" + "".join(islice(repeat("....|"), size))
+    numbers = "0" + "".join(map(lambda x: f"{x:5d}", islice(count(1), size)))
+    return ruler + "\n" + numbers
 
 if __name__ == '__main__':
     print("--- 3.1: is this syntax correct? ---")
@@ -92,6 +97,15 @@ if __name__ == '__main__':
     test(while_loop, loop_data, expected=loop_data["expected"])
 
     print("--- 3.4: test user input (float) ---")
-    test(process_float, expected=None)
+    test(cube_float_from_input, expected=None)
+
+    print("--- 3.5: test ruler generator ---")
+    ruler_data = {
+        "len": 12,
+        "expected": "|....|....|....|....|....|....|....|....|....|....|....|....|\n0    1    2    3    4    5    6    7    8    9   10   11   12"
+    }
+
+    print(draw_ruler(ruler_data["len"]))
+    test(draw_ruler, ruler_data["len"], expected=ruler_data["expected"])
 
     print("--- done ---")
