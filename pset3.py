@@ -23,7 +23,7 @@ def while_loop(data):
         i = i + 1
     return result
 
-def cube_float_from_input():
+def cube_float():
     while True:
         i = input("Insert number (type 'stop' to exit):\n")
         if i == 'stop': break
@@ -37,6 +37,11 @@ def draw_ruler(size):
     ruler = "|" + "".join(islice(repeat("....|"), size))
     numbers = "0" + "".join(map(lambda x: f"{x:5d}", islice(count(1), size)))
     return ruler + "\n" + numbers
+
+def draw_grid(rows, cols):
+    horizontal = "+" + "".join(repeat("---+", rows))
+    vertical = "\n" + "|" + "".join(repeat("   |", rows)) + "\n"
+    return horizontal + "".join(repeat(vertical + horizontal, cols))
 
 if __name__ == '__main__':
     print("--- 3.1: is this syntax correct? ---")
@@ -96,8 +101,8 @@ if __name__ == '__main__':
     test(for_loop, loop_data, expected=loop_data["expected"])
     test(while_loop, loop_data, expected=loop_data["expected"])
 
-    print("--- 3.4: test user input (float) ---")
-    test(cube_float_from_input, expected=None)
+    print("--- 3.4: test cube float (from user input) ---")
+    test(cube_float, expected=None)
 
     print("--- 3.5: test ruler generator ---")
     ruler_data = {
@@ -107,5 +112,15 @@ if __name__ == '__main__':
 
     print(draw_ruler(ruler_data["len"]))
     test(draw_ruler, ruler_data["len"], expected=ruler_data["expected"])
+
+    print("--- 3.6: test grid generator ---")
+    grid_data = {
+        "rows": 4,
+        "cols": 2,
+        "expected": "+---+---+---+---+\n|   |   |   |   |\n+---+---+---+---+\n|   |   |   |   |\n+---+---+---+---+"
+    }
+
+    print(draw_grid(grid_data["rows"], grid_data["cols"]))
+    test(draw_grid, grid_data["rows"], grid_data["cols"], expected=grid_data["expected"])
 
     print("--- done ---")
