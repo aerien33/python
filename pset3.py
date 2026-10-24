@@ -53,6 +53,34 @@ def union(data1, data2):
 def calculate_sum(data):
     return list(map(lambda item: reduce(lambda total, x: total + x, item, 0), data))
 
+def calculate_int(roman, dict):
+    n = 0
+    for i in range(len(roman)):
+        if roman[i] not in dict:
+            return -1
+
+        if i < len(roman) - 1 and dict[roman[i + 1]] > dict[roman[i]]:
+            n -= dict[roman[i]]
+        else:
+            n += dict[roman[i]]
+
+    return n
+
+def roman2int(roman, mode):
+    dict1 = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500,"M": 1000}
+    dict2 = dict([("I", 1), ("V", 5), ("X", 10), ("L", 50), ("C", 100), ("D", 500), ("M", 1000)])
+    dict3 = dict(I=1, V=5, X=10, L=50, C=100, D=500, M=1000)
+
+    match mode:
+        case 1:
+            return calculate_int(roman, dict1)
+        case 2:
+            return calculate_int(roman, dict2)
+        case 3:
+            return calculate_int(roman, dict3)
+        case _:
+            return "Choose mode from 1-3"
+
 if __name__ == '__main__':
     print("--- 3.1: is this syntax correct? ---")
     # --- a) ---
@@ -160,5 +188,22 @@ if __name__ == '__main__':
     }
 
     test(calculate_sum, series_data["data"], expected=series_data["expected"])
+
+    print("--- 3.10: test roman to int calculation ---")
+    roman_data = [
+        {"roman": "IX", "expected": 9},
+        {"roman": "XIV", "expected": 14},
+        {"roman": "XXIII", "expected": 23},
+        {"roman": "XLIX", "expected": 49},
+        {"roman": "CDIV", "expected": 404},
+        {"roman": "CMIX", "expected": 909},
+        {"roman": "MCIX", "expected": 1109},
+    ]
+
+    for data in roman_data:
+        test(roman2int, data["roman"], 1, expected=data["expected"])
+        test(roman2int, data["roman"], 2, expected=data["expected"])
+        test(roman2int, data["roman"], 3, expected=data["expected"])
+        test(roman2int, data["roman"], 4, expected="Choose mode from 1-3")
 
     print("--- done ---")
